@@ -1,0 +1,142 @@
+<div class="home-layout">
+  <div class="header">
+    <h2>Welcome, <b>{{userName}}</b></h2>
+    <nz-avatar nzIcon="user" class="user" (click)="toProfile(userId)"></nz-avatar>
+
+  </div>
+
+<div class="user-list">
+  <p><b> Users</b></p>
+  <nz-collapse >
+    <nz-collapse-panel
+      *ngFor="let user of userList"
+      [nzHeader]="user.name"
+      [nzActive]="false"
+    >
+   <div class="user-tasks" *ngFor="let task of user.tasks">
+     <div class="task-head">
+       <p><b>{{task.title}}</b></p>
+       <p>{{task.status}}</p>
+     </div>
+
+     <div  class="task-head">
+       <p>{{task.description}}</p>
+       <p>{{task.deadline}}</p>
+
+     </div>
+     <hr>
+   </div>
+    </nz-collapse-panel>
+  </nz-collapse>
+  <button nz-button nzType="primary" (click)="addUser()" class="add-user" *ngIf="role === 'admin'">Add a User</button>
+  <form *ngIf="showUserForm" nz-form [formGroup]="userForm" [nzLayout]="'vertical'" (ngSubmit)="submitUser()">
+    <h2>Add new User</h2>
+    <nz-form-item>
+      <nz-form-label nzRequired nzFor="name">Name</nz-form-label>
+      <nz-form-control nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorNm">
+        <input nz-input formControlName="name" id="name" />
+        <ng-template #userErrorNm let-control>
+          <ng-container *ngIf="control.hasError('required')">Please input name!</ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzRequired nzFor="email">Email</nz-form-label>
+      <nz-form-control  nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorEm">
+        <input nz-input type="email" formControlName="email" id="email" />
+        <ng-template #userErrorEm let-control>
+          <ng-container *ngIf="control.hasError('required')">Please input email!</ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzRequired nzFor="password">Password</nz-form-label>
+      <nz-form-control  nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorPs">
+        <nz-input-group [nzSuffix]="suffixTemplate">
+          <input
+            [type]="passwordVisible ? 'text' : 'password'"
+            nz-input
+            placeholder="input password"
+            formControlName="password" id="password"
+          />
+        </nz-input-group>
+        <ng-template #suffixTemplate>
+      <span
+        nz-icon
+        [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+        (click)="passwordVisible = !passwordVisible"
+      ></span>
+        </ng-template>
+        <ng-template #userErrorPs let-control>
+          <ng-container *ngIf="control.hasError('required')">Please input password!</ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button nzType="primary" type="submit" >Add User</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>
+  <div class="task-list">
+    <p><b> Your tasks</b></p>
+    <nz-collapse >
+      <nz-collapse-panel
+        *ngFor="let task of taskList"
+        [nzHeader]="task.title"
+        [nzActive]="false"
+        [nzExtra]="extraTpl"
+      >
+        <p style="margin:0;">
+          {{task.description}}
+        </p>
+        <ng-template #extraTpl>
+          <p>{{task.status}}</p>
+        </ng-template>
+      </nz-collapse-panel>
+    </nz-collapse>
+    <button nz-button nzType="primary" (click)="addTask()">Add a Task</button>
+
+    <form *ngIf="showTaskForm" nz-form [formGroup]="taskForm" [nzLayout]="'vertical'" (ngSubmit)="submitTask()">
+      <h2>Add a Task</h2>
+      <nz-form-item>
+        <nz-form-label nzFor="title">Title</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="title" id="title" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label nzFor="description">Description</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="description" id="description" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label nzFor="deadline">Deadline</nz-form-label>
+        <nz-form-control>
+          <input nz-input type="date" formControlName="deadline" id="deadline" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label nzFor="status">Status</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="status" id="status" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <button nz-button nzType="primary" type="submit">Add Task</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+
+
+
+
+
+
+  </div>
+
+
+</div>

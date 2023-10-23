@@ -1,0 +1,81 @@
+<form nz-form *ngIf="!registrationSuccess" [formGroup]="signupForm" [nzLayout]="'vertical'" (ngSubmit)="onSubmit()">
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="name">Name</nz-form-label>
+    <nz-form-control nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorNm">
+      <input nz-input formControlName="name" id="name" />
+      <ng-template #userErrorNm let-control>
+        <ng-container *ngIf="control.hasError('required')">Please input your Name!</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="email">Email</nz-form-label>
+    <nz-form-control nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorEml">
+      <input nz-input type="email" formControlName="email" id="email" />
+      <ng-template #userErrorEml let-control>
+        <ng-container *ngIf="control.hasError('required')">Please input your Email!</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="password">Password</nz-form-label>
+    <nz-form-control nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorPsw">
+      <nz-input-group [nzSuffix]="suffixTemplate">
+        <input
+          [type]="passwordVisible ? 'text' : 'password'"
+          nz-input
+          placeholder="input password"
+          formControlName="password" id="password"
+        />
+      </nz-input-group>
+      <ng-template #suffixTemplate>
+      <span
+        nz-icon
+        [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+        (click)="passwordVisible = !passwordVisible"
+      ></span>
+      </ng-template>
+      <ng-template #userErrorPsw let-control>
+        <ng-container *ngIf="control.hasError('required')">Please input your password!</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <button [disabled]="!signupForm.valid" nz-button nzType="primary" type="submit">Sign Up</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+
+<form  *ngIf="registrationSuccess" nz-form [formGroup]="orgForm " [nzLayout]="'vertical'" (ngSubmit)="addOrganization()">
+  <h2>Add an Organization</h2>
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="orgName">Organization Name</nz-form-label>
+    <nz-form-control  nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorOrg">
+      <input nz-input formControlName="orgName" id="orgName" />
+      <ng-template #userErrorOrg let-control>
+        <ng-container *ngIf="control.hasError('required')">Please input your Org. name!</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="phone">Phone Number</nz-form-label>
+    <nz-form-control nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorPhn">
+      <input nz-input formControlName="phone" id="phone" />
+      <ng-template #userErrorPhn let-control>
+        <ng-container *ngIf="control.hasError('required')">Please input your phone!</ng-container>
+      </ng-template>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label  nzFor="address">Address</nz-form-label>
+    <nz-form-control>
+      <input nz-input formControlName="address" id="address" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <button nz-button nzType="primary" type="submit" >Add Organization</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

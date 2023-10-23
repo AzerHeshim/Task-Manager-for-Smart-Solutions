@@ -1,1 +1,35 @@
-/* You can add global styles to this file, and also import other style files */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  height: 100%;
+}
+
+html,
+body {
+  min-height: 100%;
+  position: relative;
+  background: #fafafa;
+}
+
+*,
+*:focus,
+*:hover {
+  outline: none;
+}
+*::-webkit-scrollbar {
+  width: 2px;
+  height: 4px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #c3c3c3;
+  outline: 1px solid #c3c3c3;
+}
+.ant-form-item-control{
+  width: 100%;
+}

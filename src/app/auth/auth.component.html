@@ -1,0 +1,15 @@
+<div class="auth-layout">
+  <h1><b>Task manager</b></h1>
+  <h3>    {{ showLogin ? 'Login' : 'Register' }}</h3>
+  <div *ngIf="showLogin" class="auth-item">
+    <app-login></app-login>
+  </div>
+
+  <div *ngIf="showSignup" class="auth-item">
+    <app-sign-up></app-sign-up>
+  </div>
+
+  <a (click)="toggleSignup()">
+    {{ showLogin ? 'New to app? Register here!' : 'Already have an account? Login here!' }}
+  </a>
+</div>

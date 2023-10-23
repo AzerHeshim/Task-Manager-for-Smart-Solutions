@@ -1,0 +1,26 @@
+.home-layout{
+  padding: 24px;
+}
+.task-head{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.add-user{
+  margin-bottom: 24px;
+}
+
+.task-list{
+  margin-top: 16px;
+}
+
+.header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.user{
+  cursor: pointer;
+}
